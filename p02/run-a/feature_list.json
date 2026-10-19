@@ -1,0 +1,62 @@
+{
+  "project": "project-02",
+  "description": "Agent-readable workspace with import, detail view, and persistence",
+  "features": [
+    {
+      "id": "window-launch",
+      "name": "Window Launch",
+      "description": "Electron app opens a BrowserWindow with correct dimensions and preload script",
+      "status": "pass",
+      "evidence": "Carried over from P1 -- verified working",
+      "testedAt": "2026-03-30T10:00:00Z"
+    },
+    {
+      "id": "document-list",
+      "name": "Document List Panel",
+      "description": "Left sidebar shows imported documents with empty state message",
+      "status": "pass",
+      "evidence": "Carried over from P1 -- verified working",
+      "testedAt": "2026-03-30T10:05:00Z"
+    },
+    {
+      "id": "question-panel",
+      "name": "Question Panel",
+      "description": "Bottom input bar accepts questions and submits via IPC",
+      "status": "pass",
+      "evidence": "Carried over from P1 -- verified working",
+      "testedAt": "2026-03-30T10:08:00Z"
+    },
+    {
+      "id": "data-directory",
+      "name": "Data Directory",
+      "description": "PersistenceService creates and manages userData/knowledge-base-data directory",
+      "status": "pass",
+      "evidence": "Carried over from P1 -- verified working",
+      "testedAt": "2026-03-30T10:10:00Z"
+    },
+    {
+      "id": "document-import",
+      "name": "Document Import",
+      "description": "Users can import .txt and .md files via ImportPanel with file picker",
+      "status": "implemented-partially-verified",
+      "evidence": "Manual GUI verification on 2026-10-19: imported a .txt file and confirmed it appeared in the document list. The preload failure (`module not found: ../shared/types`) was fixed by using a local IPC_CHANNELS const enum; the rebuilt preload has no shared/types runtime dependency. The .md path, file-picker cancellation, unsupported extensions, and the 10 MB size limit/boundary have not been manually verified.",
+      "testedAt": "2026-10-19"
+    },
+    {
+      "id": "document-detail",
+      "name": "Document Detail with Content",
+      "description": "DocumentDetail shows full document content, metadata, and delete button",
+      "status": "implemented-partially-verified",
+      "evidence": "Manual GUI verification on 2026-10-19: selecting an imported .txt document displayed its metadata and full text. The delete action has not been manually verified.",
+      "testedAt": "2026-10-19"
+    },
+    {
+      "id": "basic-persistence",
+      "name": "Basic Persistence",
+      "description": "Imported documents persist across app restarts via filesystem storage",
+      "status": "pass",
+      "evidence": "Manual GUI restart test on 2026-10-19: imported test-document.txt, fully closed Electron, relaunched without re-importing, and verified restored metadata and full content.",
+      "testedAt": "2026-10-19T03:34:10.905Z"
+    }
+  ]
+}

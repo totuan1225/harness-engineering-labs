@@ -1,0 +1,62 @@
+﻿{
+    "project":  "project-02",
+    "description":  "Agent-readable workspace with import, detail view, and persistence",
+    "features":  [
+                     {
+                         "id":  "window-launch",
+                         "name":  "Window Launch",
+                         "description":  "Electron app opens a BrowserWindow with correct dimensions and preload script",
+                         "status":  "pass",
+                         "evidence":  "Carried over from P1 -- verified working",
+                         "testedAt":  "2026-03-30T10:00:00Z"
+                     },
+                     {
+                         "id":  "document-list",
+                         "name":  "Document List Panel",
+                         "description":  "Left sidebar shows imported documents with empty state message",
+                         "status":  "pass",
+                         "evidence":  "Carried over from P1 -- verified working",
+                         "testedAt":  "2026-03-30T10:05:00Z"
+                     },
+                     {
+                         "id":  "question-panel",
+                         "name":  "Question Panel",
+                         "description":  "Bottom input bar accepts questions and submits via IPC",
+                         "status":  "pass",
+                         "evidence":  "Carried over from P1 -- verified working",
+                         "testedAt":  "2026-03-30T10:08:00Z"
+                     },
+                     {
+                         "id":  "data-directory",
+                         "name":  "Data Directory",
+                         "description":  "PersistenceService creates and manages userData/knowledge-base-data directory",
+                         "status":  "pass",
+                         "evidence":  "Carried over from P1 -- verified working",
+                         "testedAt":  "2026-03-30T10:10:00Z"
+                     },
+                     {
+                         "id":  "document-import",
+                         "name":  "Document Import",
+                         "description":  "Users can import .txt and .md files via ImportPanel with file picker",
+                         "status":  "implemented-partially-verified",
+                         "evidence":  "Manual GUI verification on 2026-10-19: Electron opened, importing a .txt file succeeded, it appeared in the document list, and selecting it showed metadata and full content. The preload runtime failure (module not found: ../shared/types) was fixed by making IPC_CHANNELS a const enum; the current compiled preload has no ../shared/types runtime require. Still unverified: .md import, picker cancellation, unsupported formats, size-limit validation (including the boundary), and delete behavior.",
+                         "testedAt":  "2026-10-19"
+                     },
+                     {
+                         "id":  "document-detail",
+                         "name":  "Document Detail with Content",
+                         "description":  "DocumentDetail shows full document content, metadata, and delete button",
+                         "status":  "implemented-partially-verified",
+                         "evidence":  "Manual GUI verification on 2026-10-19: selecting the imported .txt document displayed its metadata and full content. The delete action remains unverified.",
+                         "testedAt":  "2026-10-19"
+                     },
+                     {
+                         "id":  "basic-persistence",
+                         "name":  "Basic Persistence",
+                         "description":  "Imported documents persist across app restarts via filesystem storage",
+                         "status":  "pass",
+                         "evidence":  "User-confirmed manual GUI restart verification: Electron was fully closed and reopened; previously imported documents automatically reappeared without reimporting, metadata remained available, and full document content was accessible. Automated checks were also run separately: npm.cmd run check and npm.cmd run build passed on 2026-10-19. Persistence uses app.getPath('userData')/knowledge-base-data with documents-meta.json and content/<id>.txt; App loads the persisted document list on startup.",
+                         "testedAt":  "2026-10-19"
+                     }
+                 ]
+}
