@@ -1,0 +1,41 @@
+{
+  "project": "project-01",
+  "description": "Baseline Electron knowledge base with minimal harness",
+  "features": [
+    {
+      "id": "window-launch",
+      "name": "Window Launch",
+      "description": "Electron app opens a BrowserWindow with correct dimensions and preload script",
+      "status": "pass",
+      "evidence": "Configured a 1200x800 BrowserWindow with the compiled preload and context isolation. npm run dev completed Electron launch without runtime exceptions."
+    },
+    {
+      "id": "document-list",
+      "name": "Document List Panel",
+      "description": "Left sidebar shows imported documents with empty state message",
+      "status": "pass",
+      "evidence": "Renderer loads persisted document metadata on startup and shows an empty state. The preload bridge now has a runtime availability check; native picker behavior is tracked separately until manually verified."
+    },
+    {
+      "id": "question-panel",
+      "name": "Question Panel",
+      "description": "Bottom input bar accepts questions and submits via IPC",
+      "status": "pass",
+      "evidence": "QuestionPanel submits through the typed preload API; the main process returns locally retrieved passage excerpts with document/chunk citations and persists Q&A history. npm run check passes."
+    },
+    {
+      "id": "data-directory",
+      "name": "Data Directory",
+      "description": "PersistenceService creates and manages userData/knowledge-base-data directory",
+      "status": "pass",
+      "evidence": "PersistenceService creates the userData/knowledge-base-data directory and its document/index subdirectories at startup. Build and type checks pass."
+    },
+    {
+      "id": "document-import",
+      "name": "Native Document Import",
+      "description": "Native file picker imports and indexes .txt and .md documents",
+      "status": "fail",
+      "evidence": "The preload bundle and startup bridge diagnostics are implemented. The current execution environment terminates Electron during GPU process initialization before the renderer runtime check; manually verify window.knowledgeBase, click + Import, choose a .txt or .md file, and confirm it appears indexed in the list."
+    }
+  ]
+}
